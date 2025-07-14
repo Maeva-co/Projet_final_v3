@@ -14,7 +14,7 @@
     <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
-<body class="bg-light">
+<body class="bg-light" >
 
     <div class="container py-5">
         <h1 class="text-center mb-5">Liste des objets</h1>
@@ -22,7 +22,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <?php while ($donnees = mysqli_fetch_assoc($result)) { ?>
                 <div class="col">
-                    <a href="fiche_objet.php?id_objet=<?= $donnees['id_objet']; ?>">
+                    <a style="text-decoration: none;" href="fiche_objet.php?id_objet=<?= $donnees['id_objet']; ?>">
                         <div class="card h-100 shadow-sm">
                             <img src="../assets/images/<?php echo get_image_objet($base, $donnees['id_objet']); ?>"
                                 class="card-img-top" style="height: 200px; object-fit: cover;">
@@ -33,6 +33,11 @@
                                 if ($emprunt != 0) {
                                     echo '<span class="badge bg-danger">En cours d\'emprunt</span>';
                                 }
+
+                                if ($emprunt==0)
+                                { ?>
+                                    <a class="badge bg-danger" style="text-decoration: none;" href="emprunt.php?id=<?php echo $donnees['id_objet']; ?>"> Emprunter</a>
+                               <?php }
                                 ?>
                             </div>
                         </div>

@@ -76,11 +76,26 @@ function get_object_history($base, $id_membre, $id_objet) {
     $result = mysqli_query($base, $sql);
     return $result;
 }
+
 function get_object_name($base, $id_objet) {
     $sql = "SELECT nom_objet FROM objet WHERE id_objet = '%s'";
     $sql = sprintf($sql, $id_objet);
     $result = mysqli_query($base, $sql);
     $res = mysqli_fetch_assoc($result);
     return $res['nom_objet'];
+}
+
+function calcul_date_retour($nbr)
+{
+    $date = '2025-07-14';
+    $retour = $date + $nbr;
+    return $retour;
+}
+
+function emprunter ($base, $id_objet, $id_membre, $date_emprunt, $date_retour)
+{
+    $sql = "INSERT INTO emprunt(id_objet, id_membre, date_emprunt, date_retour) VALUES ('%s', '%s', '%s', '%s')";
+    $sql = sprintf($sql, $id_objet, $id_membre, $date_emprunt, $date_retour);
+    mysqli_query($base, $sql);
 }
 ?>
